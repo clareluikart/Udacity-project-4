@@ -43,8 +43,15 @@ $(function() {
      * in the allFeeds object and ensures it has a name defined
      * and that the name is not empty.
      */
+    it('should have all of its names defined', function() {
+      for (var ind = allFeeds.length - 1; ind >= 0; ind--) {
+        expect(allFeeds[ind].name).toBeDefined();
+        expect(allFeeds[ind].name.length).not.toBe(0);
+      }
+    });
 
   });
+
 
 
   /* TODO: Write a new test suite named "The menu" */
