@@ -94,7 +94,7 @@ $(function() {
       });
     });
     it('should contain at least one entry', function(done) {
-      expect(document.getElementsByClassName('entry')).toBeDefined();
+      expect(document.getElementsByClassName('entry')[0]).toBeDefined();
       done();
     });
   });
@@ -106,8 +106,5 @@ $(function() {
      * Remember, loadFeed() is asynchronous.
      */
 
-    it('should change when a new feed is loaded', function() {
-
-    });
   });
 }());
