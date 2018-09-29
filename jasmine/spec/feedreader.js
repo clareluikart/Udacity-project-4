@@ -72,7 +72,8 @@ $(function() {
     it('should hide when clicked and display when clicked again', function() {
       //after first click check this
       $('.menu-icon-link').click();
-      expect(document.getElementsByTagName('body')[0].classList[0]).not.toBeDefined();
+      //expect(document.getElementsByTagName('body')[0].classList[0]).not.toBeDefined();
+      expect(document.getElementsByTagName('body')[0].classList[0]).not.toBe('menu-hidden');
       //after second click check this
       $('.menu-icon-link').click();
       expect(document.getElementsByTagName('body')[0].classList[0]).toBe('menu-hidden');
@@ -94,7 +95,7 @@ $(function() {
       });
     });
     it('should contain at least one entry', function(done) {
-      expect(document.getElementsByClassName('entry')[0]).toBeDefined();
+      expect(document.getElementsByClassName('entry').length).toBeGreaterThan(0);
       done();
     });
   });
@@ -104,14 +105,17 @@ $(function() {
      * by the loadFeed function that the content actually changes.
      * Remember, loadFeed() is asynchronous.
      */
-    var firstFeedEntry = document.getElementsByClassName('entry')[0];
-    beforeEach(function(done) {
-      loadFeed(2, function() {
+    var firstFeedEntry,
+      secondFeedEntry;
+    loadFeed(1, function(loadFeed) {
+      firstFeedEntry = document.getElementsByClassName('entry')[0];
+      loadFeed(2, function(done) {
+        secondFeedEntry = document.getElementsByClassName('entry')[0];
         done();
       });
     });
-    it('should contain at least one entry', function(done) {
-      expect(document.getElementsByClassName('entry')[0]).not.toBe(firstFeedEntry);
+    it('should change when new feed is loaded', function(done) {
+      expect(secondFeedEntry).not.toBe(firstFeedEntry);
       done();
     });
   });
